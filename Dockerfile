@@ -1,5 +1,6 @@
 FROM alpine
 
+ENV NAME=productive_remo
 ADD ./build /build
 ADD ./entrypoint /entrypoint
 
